@@ -31,12 +31,14 @@ class YouSeeApi(object):
 
         print 'Invoking URL: ' + url
 
-        r = urllib2.Request(url, headers = {'X-API-KEY' : API_KEY})
-        u = urllib2.urlopen(r)
-        json = u.read()
-        u.close()
-
-        return simplejson.loads(json)
+        try:
+            r = urllib2.Request(url, headers = {'X-API-KEY' : API_KEY})
+            u = urllib2.urlopen(r)
+            json = u.read()
+            u.close()
+            return simplejson.loads(json)
+        except urllib2.HTTPError, error:
+            raise YouSeeApiException(error)
 
 class YouSeeLiveTVApi(YouSeeApi):
     def popularChannels(self):
@@ -60,7 +62,7 @@ class YouSeeLiveTVApi(YouSeeApi):
         return self._invoke(AREA_LIVETV, 'suggested_channels')
 
 
-    def streamUrl(self, channelId, client = 'xbmc'):
+    def streamUrl(self, channelId, client = 'android'):
         """
         Returns absolute streaming URL for channel.
         Channel rights are based on client ip address.
@@ -74,7 +76,9 @@ class YouSeeLiveTVApi(YouSeeApi):
             'channel_id' : channelId,
             'client' : client
         })
-        
+
+        print json
+
         return json['url']
 
 class YouSeeMovieApi(YouSeeApi):
@@ -121,6 +125,13 @@ class YouSeeMovieApi(YouSeeApi):
             'theme' : theme
         })
 
+    def trailerUrl(self, movieUrlId):
+        u = urllib2.urlopen(TRAILER_URL + movieUrlId)
+        xml = u.read()
+        u.close()
+
+        
+
 
 class YouSeeTVGuideApi(YouSeeApi):
     def channels(self):
@@ -160,13 +171,18 @@ class YouSeeUsersApi(YouSeeApi):
     def transactions(self):
         return self._invoke(AREA_USERS, 'transactions')
 
+class YouSeeApiException(Exception):
+    def __init__(self, description):
+        self.description = str(description)
+
 if __name__ == '__main__':
     api = YouSeeLiveTVApi()
-    json = api.allowedChannels()
+    print api.getStreamUrl(1)
+
 
     #api = YouSeeMovieApi()
     #print api.moviesInGenre('action')['movies'][0]
 
-    s = simplejson.dumps(json, sort_keys=True, indent='    ')
-    print '\n'.join([l.rstrip() for l in  s.splitlines()])
+    #s = simplejson.dumps(json, sort_keys=True, indent='    ')
+    #print '\n'.join([l.rstrip() for l in  s.splitlines()])
 
