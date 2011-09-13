@@ -18,31 +18,28 @@ except ImportError:
     PIL_AVAILABLE = False
 
 
-ADDON = xbmcaddon.Addon(id = 'plugin.video.yousee.tv')
 
 class YouSeeTv(object):
-    FANART_IMAGE = os.path.join(ADDON.getAddonInfo('path'), 'fanart.jpg')
-
     def showOverview(self):
         iconImage = os.path.join(ADDON.getAddonInfo('path'), 'icon.png')
 
         item = xbmcgui.ListItem(ADDON.getLocalizedString(30000), iconImage = iconImage)
-        item.setProperty('Fanart_Image', self.FANART_IMAGE)
+        item.setProperty('Fanart_Image', FANART_IMAGE)
         url = PATH + '?area=livetv'
         xbmcplugin.addDirectoryItem(HANDLE, url, item, True)
 
         item = xbmcgui.ListItem(ADDON.getLocalizedString(30001), iconImage = iconImage)
-        item.setProperty('Fanart_Image', self.FANART_IMAGE)
+        item.setProperty('Fanart_Image', FANART_IMAGE)
         url = PATH + '?area=movie-genre'
         xbmcplugin.addDirectoryItem(HANDLE, url, item, True)
 
         item = xbmcgui.ListItem(ADDON.getLocalizedString(30002), iconImage = iconImage)
-        item.setProperty('Fanart_Image', self.FANART_IMAGE)
+        item.setProperty('Fanart_Image', FANART_IMAGE)
         url = PATH + '?area=movie-theme'
         xbmcplugin.addDirectoryItem(HANDLE, url, item, True)
 
         item = xbmcgui.ListItem(ADDON.getLocalizedString(30003), iconImage = iconImage)
-        item.setProperty('Fanart_Image', self.FANART_IMAGE)
+        item.setProperty('Fanart_Image', FANART_IMAGE)
         url = PATH + '?area=movie-search'
         xbmcplugin.addDirectoryItem(HANDLE, url, item, True)
 
@@ -55,18 +52,25 @@ class YouSeeTv(object):
         for channel in channels:
             iconImage = self._generateChannelIcon(channel['id'], channel['logos']['large'])
             item = xbmcgui.ListItem(channel['nicename'], iconImage = iconImage)
-            item.setProperty('Fanart_Image', self.FANART_IMAGE)
+            item.setProperty('Fanart_Image', FANART_IMAGE)
+            item.setProperty('IsPlayable', 'true')
             url = PATH + '?channel=' + str(channel['id'])
-            xbmcplugin.addDirectoryItem(HANDLE, url, item, True)
+            xbmcplugin.addDirectoryItem(HANDLE, url, item)
 
         xbmcplugin.endOfDirectory(HANDLE, succeeded = len(channels) > 0)
 
     def playLiveTVChannel(self, channelId):
-        api = ysapi.YouSeeLiveTVApi()
-        url = api.streamUrl(channelId)
-        print "url = " + url
-        item = xbmcgui.ListItem(path = url)
-        xbmcplugin.setResolvedUrl(HANDLE, True, item)
+        try:
+            api = ysapi.YouSeeLiveTVApi()
+            url = api.streamUrl(channelId)
+            item = xbmcgui.ListItem(path = url)
+            xbmcplugin.setResolvedUrl(HANDLE, True, item)
+        except ysapi.YouSeeApiException, ex:
+            item = xbmcgui.ListItem()
+            xbmcplugin.setResolvedUrl(HANDLE, False, item)
+            xbmcgui.Dialog().ok(ADDON.getLocalizedString(30050), ADDON.getLocalizedString(30051),
+                ADDON.getLocalizedString(30052), ex.description)
+
 
     def showMovieGenres(self):
         api = ysapi.YouSeeMovieApi()
@@ -74,7 +78,7 @@ class YouSeeTv(object):
 
         for genre in genres:
             item = xbmcgui.ListItem(genre['name'] + ' (' + str(genre['count']) + ')')
-            item.setProperty('Fanart_Image', self.FANART_IMAGE)
+            item.setProperty('Fanart_Image', FANART_IMAGE)
             url = PATH + '?genre=' + genre['url_id']
             xbmcplugin.addDirectoryItem(HANDLE, url, item, isFolder = True, totalItems = int(genre['count']))
 
@@ -97,7 +101,7 @@ class YouSeeTv(object):
 
         for theme in themes:
             item = xbmcgui.ListItem(theme['name'] + ' (' + str(theme['count']) + ')')
-            item.setProperty('Fanart_Image', self.FANART_IMAGE)
+            item.setProperty('Fanart_Image', FANART_IMAGE)
             url = PATH + '?genre=' + theme['url_id']
             xbmcplugin.addDirectoryItem(HANDLE, url, item, isFolder = True, totalItems = int(theme['count']))
 
@@ -197,9 +201,12 @@ class YouSeeTv(object):
         xbmcgui.Dialog().ok(title, line1, line2, line3)
 
 if __name__ == '__main__':
+    ADDON = xbmcaddon.Addon(id = 'plugin.video.yousee.tv')
     PATH = sys.argv[0]
     HANDLE = int(sys.argv[1])
     PARAMS = urlparse.parse_qs(sys.argv[2][1:])
+
+    FANART_IMAGE = os.path.join(ADDON.getAddonInfo('path'), 'fanart.jpg')
 
     CACHE_PATH = xbmc.translatePath(ADDON.getAddonInfo("Profile"))
     if not os.path.exists(CACHE_PATH):
