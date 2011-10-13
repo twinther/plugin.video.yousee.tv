@@ -23,10 +23,11 @@ class YouSeeApi(object):
         print self.COOKIE_JAR
         urllib2.install_opener(urllib2.build_opener(urllib2.HTTPCookieProcessor(self.COOKIE_JAR)))
 
-    def _invoke(self, area, function, params=dict()):
+    def _invoke(self, area, function, params = None):
         url = API_URL + '/' + area + '/' + function
-        for key, value in params.items():
-            url += '/' + key + '/' + str(value)
+        if params:
+            for key, value in params.items():
+                url += '/' + key + '/' + str(value)
         url += '/format/json'
 
         print 'Invoking URL: ' + url
@@ -62,7 +63,7 @@ class YouSeeLiveTVApi(YouSeeApi):
         return self._invoke(AREA_LIVETV, 'suggested_channels')
 
 
-    def streamUrl(self, channelId, client = 'android'):
+    def streamUrl(self, channelId, client = 'xbmc'):
         """
         Returns absolute streaming URL for channel.
         Channel rights are based on client ip address.
@@ -125,14 +126,6 @@ class YouSeeMovieApi(YouSeeApi):
             'theme' : theme
         })
 
-    def trailerUrl(self, movieUrlId):
-        u = urllib2.urlopen(TRAILER_URL + movieUrlId)
-        xml = u.read()
-        u.close()
-
-        
-
-
 class YouSeeTVGuideApi(YouSeeApi):
     def channels(self):
         """
@@ -148,12 +141,14 @@ class YouSeeTVGuideApi(YouSeeApi):
         """
         return self._invoke(AREA_TVGUIDE, 'categories')
 
-    def programs(self):
-        """
-        Returns program list
-        """
-        return self._invoke(AREA_TVGUIDE, 'programs')
-
+    def programs(self, channelId, offset = 0):
+         """
+         Returns program list
+         """
+         return self._invoke(AREA_TVGUIDE, 'programs', {
+             'channel_id' : channelId,
+             'offset' : offset
+         })
 
 class YouSeePlayApi(YouSeeApi):
     def album(self, id):
@@ -173,16 +168,22 @@ class YouSeeUsersApi(YouSeeApi):
 
 class YouSeeApiException(Exception):
     def __init__(self, description):
+        super(YouSeeApiException, self).__init__()
         self.description = str(description)
 
+    def __repr__(self):
+        return "<YouSeeApiException description=%s>" % self.description
+
 if __name__ == '__main__':
-    api = YouSeeLiveTVApi()
-    print api.getStreamUrl(1)
+#    api = YouSeeLiveTVApi()
+#    json = api.allowedChannels()
 
+    api = YouSeeTVGuideApi()
+    json = api.programs(1)
 
-    #api = YouSeeMovieApi()
-    #print api.moviesInGenre('action')['movies'][0]
+#    api = YouSeeMovieApi()
+#    json= api.moviesInGenre('action')['movies'][1]
 
-    #s = simplejson.dumps(json, sort_keys=True, indent='    ')
-    #print '\n'.join([l.rstrip() for l in  s.splitlines()])
+    s = simplejson.dumps(json, sort_keys=True, indent='    ')
+    print '\n'.join([l.rstrip() for l in  s.splitlines()])
 

@@ -1,7 +1,7 @@
-[B]Version 2.0.0[/B]
+[B]Version 2.0.0 - 2011-10-xx[/B]
 - Complete rewrite using official YouSee API
 - Login is no longer possible, so you need to be using your YouSee internet connection.
-- Improved channel icon (if Python PIL image is available)
+- Improved graphics
 - Added YouSee Cinema navigation (disabled by default)
   - Unfortunately it is not possible to rent movies yet, as YouSee are investigating the rights required.
 
