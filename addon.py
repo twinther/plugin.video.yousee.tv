@@ -11,14 +11,6 @@ import xbmcaddon
 import xbmcgui
 import xbmcplugin
 
-try:
-    from PIL import Image
-    PIL_AVAILABLE = True
-except ImportError:
-    PIL_AVAILABLE = False
-
-
-
 class YouSeeTv(object):
     def showOverview(self):
         iconImage = os.path.join(ADDON.getAddonInfo('path'), 'icon.png')
@@ -49,9 +41,16 @@ class YouSeeTv(object):
         api = ysapi.YouSeeLiveTVApi()
         channels = api.allowedChannels()
 
+        try:
+            self._generateChannelIcons(channels)
+        except Exception:
+            xbmc.log("Caught exception whil generating channel icons!")
+
         for channel in channels:
-            iconImage = self._generateChannelIcon(channel['id'], channel['logos']['large'])
-            item = xbmcgui.ListItem(channel['nicename'], iconImage = iconImage)
+            iconImage = os.path.join(CACHE_PATH, str(channel['id']) + '.png')
+            if not os.path.exists(iconImage):
+                iconImage = channel['logos']['large']
+            item = xbmcgui.ListItem(channel['nicename'], iconImage = iconImage, thumbnailImage = iconImage)
             item.setProperty('Fanart_Image', FANART_IMAGE)
             item.setProperty('IsPlayable', 'true')
             url = PATH + '?channel=' + str(channel['id'])
@@ -123,7 +122,7 @@ class YouSeeTv(object):
         if kbd.isConfirmed():
             api = ysapi.YouSeeMovieApi()
             movies = api.search(kbd.getText())
-            
+
             for movie in movies['movies']:
                 self._addMovieDirectoryItem(movie)
 
@@ -131,66 +130,67 @@ class YouSeeTv(object):
             xbmcplugin.endOfDirectory(HANDLE)
 
     def _addMovieDirectoryItem(self, movie):
-        fanartImage = os.path.join(ADDON.getAddonInfo('path'), 'fanart.jpg')
-
         infoLabels = dict()
         infoLabels['plot'] = movie['summary_medium']
         infoLabels['plotoutline'] = movie['summary_short']
         infoLabels['year'] = movie['year']
         infoLabels['duration'] = str(movie['length_in_minutes'])
         infoLabels['cast'] = movie['cast']
-        infoLabels['director'] = movie['directors'][0]
+        infoLabels['director'] = ' / '.join(movie['directors'])
         infoLabels['mpaa'] = str(movie['age_rating'])
         infoLabels['code'] = str(movie['imdb_id'])
-        infoLabels['genre'] = movie['genres'][0]
+        infoLabels['genre'] = ' / '.join(movie['genres'])
 
         iconImage = movie['cover_prefix'] + movie['covers']['big']
 
         item = xbmcgui.ListItem(movie['title'] + ' (DKK ' + str(movie['price']) + ')', iconImage = iconImage)
         item.setInfo('video', infoLabels = infoLabels)
-        item.setProperty('Fanart_Image', fanartImage)
+        item.setProperty('Fanart_Image', FANART_IMAGE)
         url = PATH + '?movie=' + movie['url_id']
         xbmcplugin.addDirectoryItem(HANDLE, url, item, isFolder = False)
 
-    def _generateChannelIcon(self, channelId, url):
+    def _anyChannelIconsMissing(self, channels):
+        for channel in channels:
+            path = os.path.join(CACHE_PATH, str(channel['id']) + '.png')
+            if not os.path.exists(path):
+                return True
+        return False
+
+    def _generateChannelIcons(self, channels):
         """
         Generates a pretty 256x256 channel icon by downloading the channel graphics
         and pasting in onto the channel_bg.png. The result is cached.
 
         In case the PIL library is not available the URL
         for the channel graphics is used directly.
-
-        @param channelId: The channel ID, used as part of the cache filename
-        @type channelId: int
-        @param url: The full URL for the channel graphics
-        @type url: str
-        @return: The full path to the generated channel icon or the url parameter if PIL is not available
         """
-        if not PIL_AVAILABLE:
-            return url
 
-        path = os.path.join(CACHE_PATH, str(channelId) + '.png')
-        if not os.path.exists(path):
-            u = urllib2.urlopen(url)
-            data = u.read()
-            u.close()
+        if self._anyChannelIconsMissing(channels):
+            import PIL.Image
+            sys.modules['Image'] = PIL.Image # http://projects.scipy.org/scipy/ticket/1374
 
-            image = Image.open(StringIO.StringIO(data))
-            (width, height) = image.size
+            for channel in channels:
+                path = os.path.join(CACHE_PATH, str(channel['id']) + '.png')
+                xbmc.log("Generating image for " + channel['nicename'] + "...")
+                
+                u = urllib2.urlopen(channel['logos']['large'])
+                data = u.read()
+                u.close()
 
-            iconImage = os.path.join(ADDON.getAddonInfo('path'), 'resources', 'channel_bg.png')
-            out = Image.open(iconImage)
+                image = PIL.Image.open(StringIO.StringIO(data))
+                (width, height) = image.size
 
-            x = (256 - width) / 2
-            y = (256 - height) / 2
-            if image.mode == 'RGBA':
-                out.paste(image, (x, y), image)
-            else:
-                out.paste(image, (x, y))
+                iconImage = os.path.join(ADDON.getAddonInfo('path'), 'resources', 'channel_bg.png')
+                out = PIL.Image.open(iconImage)
 
-            out.save(path)
+                x = (256 - width) / 2
+                y = (256 - height) / 2
+                if image.mode == 'RGBA':
+                    out.paste(image, (x, y), image)
+                else:
+                    out.paste(image, (x, y))
 
-        return path
+                out.save(path)
 
 
     def _showWarning(self):
