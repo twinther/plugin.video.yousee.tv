@@ -1,6 +1,6 @@
 import os
 import sys
-import cgi as urlparse
+import urlparse
 import urllib2
 import StringIO
 
@@ -65,16 +65,16 @@ class YouSeeTv(object):
     def playLiveTVChannel(self, channelId):
         api = ysapi.YouSeeLiveTVApi()
         json = api.streamUrl(channelId)
-        if not json or not json.has_key('url'):
-            if not json:
-                self._showError('Unknown error')
-            elif json.has_key('error'):
+        if not json or not json.has_key('url') or not json['url']:
+            xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem())
+
+            if json and json.has_key('error'):
                 self._showError(json['error'])
-            item = xbmcgui.ListItem()
-            xbmcplugin.setResolvedUrl(HANDLE, False, item)
+            else:
+                self._showError()
             return
 
-        item = xbmcgui.ListItem(path = url)
+        item = xbmcgui.ListItem(path = json['url'])
         xbmcplugin.setResolvedUrl(HANDLE, True, item)
 
     def showMovieGenres(self):
@@ -86,7 +86,7 @@ class YouSeeTv(object):
             return
 
         for genre in genres:
-            item = xbmcgui.ListItem(genre['name'] + ' (' + str(genre['count']) + ')')
+            item = xbmcgui.ListItem(genre['name'] + ' (' + str(genre['count']) + ')', iconImage = ICON)
             item.setProperty('Fanart_Image', FANART_IMAGE)
             url = PATH + '?genre=' + genre['url_id']
             xbmcplugin.addDirectoryItem(HANDLE, url, item, isFolder = True, totalItems = int(genre['count']))
@@ -119,7 +119,7 @@ class YouSeeTv(object):
 
 
         for theme in themes:
-            item = xbmcgui.ListItem(theme['name'] + ' (' + str(theme['count']) + ')')
+            item = xbmcgui.ListItem(theme['name'] + ' (' + str(theme['count']) + ')', iconImage = ICON)
             item.setProperty('Fanart_Image', FANART_IMAGE)
             url = PATH + '?genre=' + theme['url_id']
             xbmcplugin.addDirectoryItem(HANDLE, url, item, isFolder = True, totalItems = int(theme['count']))
@@ -229,7 +229,7 @@ class YouSeeTv(object):
         line3 = ADDON.getLocalizedString(39003)
         xbmcgui.Dialog().ok(title, line1, line2, line3)
 
-    def _showError(self, description = 'Ingen data fra serveren / Ukendt fejl'):
+    def _showError(self, description = 'Ukendt fejl'):
         xbmcgui.Dialog().ok(ADDON.getLocalizedString(30050), ADDON.getLocalizedString(30051),
             ADDON.getLocalizedString(30052), description)
 
@@ -241,6 +241,7 @@ if __name__ == '__main__':
     PARAMS = urlparse.parse_qs(sys.argv[2][1:])
 
     FANART_IMAGE = os.path.join(ADDON.getAddonInfo('path'), 'fanart.jpg')
+    ICON = os.path.join(ADDON.getAddonInfo('path'), 'icon.png')
 
     CACHE_PATH = xbmc.translatePath(ADDON.getAddonInfo("Profile"))
     if not os.path.exists(CACHE_PATH):

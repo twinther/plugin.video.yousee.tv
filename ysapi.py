@@ -5,7 +5,6 @@ https://docs.google.com/document/d/1_rs5BXklnLqGS6g6eAjevVHsPafv4PXDCi_dAM2b7G0/
 import cookielib
 import urllib2
 import simplejson
-#import xbmc
 
 API_URL = 'http://api.yousee.tv/rest'
 API_KEY = 'HCN2BMuByjWnrBF4rUncEfFBMXDumku7nfT3CMnn'
@@ -31,7 +30,7 @@ class YouSeeApi(object):
                 url += '/' + key + '/' + str(value)
         url += '/format/json'
 
-        #xbmc.log('Invoking URL: %s' % url, xbmc.LOGDEBUG)
+        print 'Invoking URL: %s' % url
 
         try:
             r = urllib2.Request(url, headers = {'X-API-KEY' : API_KEY})
