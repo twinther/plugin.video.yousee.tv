@@ -5,6 +5,7 @@ https://docs.google.com/document/d/1_rs5BXklnLqGS6g6eAjevVHsPafv4PXDCi_dAM2b7G0/
 import cookielib
 import urllib2
 import simplejson
+#import xbmc
 
 API_URL = 'http://api.yousee.tv/rest'
 API_KEY = 'HCN2BMuByjWnrBF4rUncEfFBMXDumku7nfT3CMnn'
@@ -30,16 +31,20 @@ class YouSeeApi(object):
                 url += '/' + key + '/' + str(value)
         url += '/format/json'
 
-        print 'Invoking URL: ' + url
+        #xbmc.log('Invoking URL: %s' % url, xbmc.LOGDEBUG)
 
         try:
             r = urllib2.Request(url, headers = {'X-API-KEY' : API_KEY})
             u = urllib2.urlopen(r)
             json = u.read()
             u.close()
-            return simplejson.loads(json)
         except urllib2.HTTPError, error:
-            raise YouSeeApiException(error)
+            json = error.read()
+
+        try:
+            return simplejson.loads(json)
+        except simplejson.JSONDecodeError, error:
+            return None
 
 class YouSeeLiveTVApi(YouSeeApi):
     def popularChannels(self):
@@ -78,9 +83,7 @@ class YouSeeLiveTVApi(YouSeeApi):
             'client' : client
         })
 
-        print json
-
-        return json['url']
+        return json
 
 class YouSeeMovieApi(YouSeeApi):
     def themes(self):
@@ -166,20 +169,13 @@ class YouSeeUsersApi(YouSeeApi):
     def transactions(self):
         return self._invoke(AREA_USERS, 'transactions')
 
-class YouSeeApiException(Exception):
-    def __init__(self, description):
-        super(YouSeeApiException, self).__init__()
-        self.description = str(description)
-
-    def __repr__(self):
-        return "<YouSeeApiException description=%s>" % self.description
-
 if __name__ == '__main__':
-#    api = YouSeeLiveTVApi()
+    api = YouSeeLiveTVApi()
 #    json = api.allowedChannels()
+    json = api.streamUrl(1)
 
-    api = YouSeeTVGuideApi()
-    json = api.programs(1)
+#    api = YouSeeTVGuideApi()
+#    json = api.programs(1)
 
 #    api = YouSeeMovieApi()
 #    json= api.moviesInGenre('action')['movies'][1]
