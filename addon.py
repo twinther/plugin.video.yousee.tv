@@ -40,6 +40,10 @@ class YouSeeTv(object):
     def showLiveTVChannels(self):
         api = ysapi.YouSeeLiveTVApi()
         channels = api.allowedChannels()
+        if not channels:
+            self._showError()
+            xbmcplugin.endOfDirectory(HANDLE, False)
+            return
 
         try:
             self._generateChannelIcons(channels)
@@ -59,21 +63,27 @@ class YouSeeTv(object):
         xbmcplugin.endOfDirectory(HANDLE, succeeded = len(channels) > 0)
 
     def playLiveTVChannel(self, channelId):
-        try:
-            api = ysapi.YouSeeLiveTVApi()
-            url = api.streamUrl(channelId)
-            item = xbmcgui.ListItem(path = url)
-            xbmcplugin.setResolvedUrl(HANDLE, True, item)
-        except ysapi.YouSeeApiException, ex:
+        api = ysapi.YouSeeLiveTVApi()
+        json = api.streamUrl(channelId)
+        if not json or not json.has_key('url'):
+            if not json:
+                self._showError('Unknown error')
+            elif json.has_key('error'):
+                self._showError(json['error'])
             item = xbmcgui.ListItem()
             xbmcplugin.setResolvedUrl(HANDLE, False, item)
-            xbmcgui.Dialog().ok(ADDON.getLocalizedString(30050), ADDON.getLocalizedString(30051),
-                ADDON.getLocalizedString(30052), ex.description)
+            return
 
+        item = xbmcgui.ListItem(path = url)
+        xbmcplugin.setResolvedUrl(HANDLE, True, item)
 
     def showMovieGenres(self):
         api = ysapi.YouSeeMovieApi()
         genres = api.genres()
+        if not genres:
+            self._showError()
+            xbmcplugin.endOfDirectory(HANDLE, False)
+            return
 
         for genre in genres:
             item = xbmcgui.ListItem(genre['name'] + ' (' + str(genre['count']) + ')')
@@ -86,6 +96,11 @@ class YouSeeTv(object):
     def showMoviesInGenre(self, genre):
         api = ysapi.YouSeeMovieApi()
         moviesInGenre = api.moviesInGenre(genre)
+        if not moviesInGenre:
+            self._showError()
+            xbmcplugin.endOfDirectory(HANDLE, False)
+            return
+
 
         for movie in moviesInGenre['movies']:
             self._addMovieDirectoryItem(movie)
@@ -97,6 +112,11 @@ class YouSeeTv(object):
     def showMovieThemes(self):
         api = ysapi.YouSeeMovieApi()
         themes = api.themes()
+        if not themes:
+            self._showError()
+            xbmcplugin.endOfDirectory(HANDLE, False)
+            return
+
 
         for theme in themes:
             item = xbmcgui.ListItem(theme['name'] + ' (' + str(theme['count']) + ')')
@@ -109,6 +129,10 @@ class YouSeeTv(object):
     def showMoviesInTheme(self, theme):
         api = ysapi.YouSeeMovieApi()
         moviesInTheme= api.moviesInTheme(theme)
+        if not moviesInTheme:
+            self._showError()
+            xbmcplugin.endOfDirectory(HANDLE, False)
+            return
 
         for movie in moviesInTheme['movies']:
             self._addMovieDirectoryItem(movie)
@@ -122,6 +146,11 @@ class YouSeeTv(object):
         if kbd.isConfirmed():
             api = ysapi.YouSeeMovieApi()
             movies = api.search(kbd.getText())
+            if not movies:
+                self._showError()
+                xbmcplugin.endOfDirectory(HANDLE, False)
+                return
+
 
             for movie in movies['movies']:
                 self._addMovieDirectoryItem(movie)
@@ -200,8 +229,13 @@ class YouSeeTv(object):
         line3 = ADDON.getLocalizedString(39003)
         xbmcgui.Dialog().ok(title, line1, line2, line3)
 
+    def _showError(self, description = 'Ingen data fra serveren / Ukendt fejl'):
+        xbmcgui.Dialog().ok(ADDON.getLocalizedString(30050), ADDON.getLocalizedString(30051),
+            ADDON.getLocalizedString(30052), description)
+
+
 if __name__ == '__main__':
-    ADDON = xbmcaddon.Addon(id = 'plugin.video.yousee.tv')
+    ADDON = xbmcaddon.Addon()
     PATH = sys.argv[0]
     HANDLE = int(sys.argv[1])
     PARAMS = urlparse.parse_qs(sys.argv[2][1:])
