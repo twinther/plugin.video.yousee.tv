@@ -11,6 +11,9 @@
 
     <string id="30100">Features</string>
     <string id="30101">Hide YouSee Cinema navigation</string>
+    <string id="30102">Username</string>
+    <string id="30103">Password</string>
+    <string id="30104">Login not required for YouSee Bredbånd customers</string>
 
     <string id="39000">Please note!</string>
     <string id="39001">Unfortunately it is not possible to rent movies via</string>

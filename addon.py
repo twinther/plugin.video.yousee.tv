@@ -38,7 +38,9 @@ class YouSeeTv(object):
         xbmcplugin.endOfDirectory(HANDLE)
 
     def showLiveTVChannels(self):
-        api = ysapi.YouSeeLiveTVApi()
+        if not self._checkLogin():
+            return
+        api = ysapi.YouSeeLiveTVApi(CACHE_PATH)
         channels = api.allowedChannels()
         if not channels:
             self._showError()
@@ -63,7 +65,9 @@ class YouSeeTv(object):
         xbmcplugin.endOfDirectory(HANDLE, succeeded = len(channels) > 0)
 
     def playLiveTVChannel(self, channelId):
-        api = ysapi.YouSeeLiveTVApi()
+        if not self._checkLogin():
+            return
+        api = ysapi.YouSeeLiveTVApi(CACHE_PATH)
         json = api.streamUrl(channelId)
         if not json or not json.has_key('url') or not json['url']:
             xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem())
@@ -78,7 +82,9 @@ class YouSeeTv(object):
         xbmcplugin.setResolvedUrl(HANDLE, True, item)
 
     def showMovieGenres(self):
-        api = ysapi.YouSeeMovieApi()
+        if not self._checkLogin():
+            return
+        api = ysapi.YouSeeMovieApi(CACHE_PATH)
         genres = api.genres()
         if not genres:
             self._showError()
@@ -94,7 +100,9 @@ class YouSeeTv(object):
         xbmcplugin.endOfDirectory(HANDLE)
 
     def showMoviesInGenre(self, genre):
-        api = ysapi.YouSeeMovieApi()
+        if not self._checkLogin():
+            return
+        api = ysapi.YouSeeMovieApi(CACHE_PATH)
         moviesInGenre = api.moviesInGenre(genre)
         if not moviesInGenre:
             self._showError()
@@ -110,7 +118,9 @@ class YouSeeTv(object):
 
 
     def showMovieThemes(self):
-        api = ysapi.YouSeeMovieApi()
+        if not self._checkLogin():
+            return
+        api = ysapi.YouSeeMovieApi(CACHE_PATH)
         themes = api.themes()
         if not themes:
             self._showError()
@@ -127,7 +137,9 @@ class YouSeeTv(object):
         xbmcplugin.endOfDirectory(HANDLE)
 
     def showMoviesInTheme(self, theme):
-        api = ysapi.YouSeeMovieApi()
+        if not self._checkLogin():
+            return
+        api = ysapi.YouSeeMovieApi(CACHE_PATH)
         moviesInTheme= api.moviesInTheme(theme)
         if not moviesInTheme:
             self._showError()
@@ -141,10 +153,12 @@ class YouSeeTv(object):
         xbmcplugin.endOfDirectory(HANDLE)
 
     def searchMovies(self):
+        if not self._checkLogin():
+            return
         kbd = xbmc.Keyboard('', 'Search movies')
         kbd.doModal()
         if kbd.isConfirmed():
-            api = ysapi.YouSeeMovieApi()
+            api = ysapi.YouSeeMovieApi(CACHE_PATH)
             movies = api.search(kbd.getText())
             if not movies:
                 self._showError()
@@ -176,7 +190,7 @@ class YouSeeTv(object):
         item.setInfo('video', infoLabels = infoLabels)
         item.setProperty('Fanart_Image', FANART_IMAGE)
         url = PATH + '?movie=' + movie['url_id']
-        xbmcplugin.addDirectoryItem(HANDLE, url, item, isFolder = False)
+        xbmcplugin.addDirectoryItem(HANDLE, url, item)
 
     def _anyChannelIconsMissing(self, channels):
         for channel in channels:
@@ -221,6 +235,19 @@ class YouSeeTv(object):
 
                 out.save(path)
 
+    def _checkLogin(self):
+        username = ADDON.getSetting('username')
+        password = ADDON.getSetting('password')
+
+        if username != '' and password != '':
+            print '[plugin.video.yousee.tv] Logging in...'
+            api = ysapi.YouSeeUsersApi(CACHE_PATH)
+            resp = api.login(username, password)
+            if resp.has_key('error'):
+                self._showError(resp['error'])
+                return False
+
+        return True
 
     def _showWarning(self):
         title = ADDON.getLocalizedString(39000)
