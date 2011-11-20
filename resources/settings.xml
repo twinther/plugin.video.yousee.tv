@@ -2,6 +2,10 @@
 <settings>
 	<category label="30100">
 		<setting id="hide.movie.area" label="30101" type="bool" default="true" />
+        <setting type="sep" />
+        <setting type="lsep" label="30104" />
+        <setting id="username" label="30102" type="text" />
+        <setting id="password" label="30103" type="text" />
 	</category>
 </settings>
 
