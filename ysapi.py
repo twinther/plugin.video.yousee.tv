@@ -3,9 +3,12 @@ https://docs.google.com/document/d/1_rs5BXklnLqGS6g6eAjevVHsPafv4PXDCi_dAM2b7G0/
 """
 
 import cookielib
+import urllib
 import urllib2
 import simplejson
 import os
+import re
+import uuid
 
 API_URL = 'http://api.yousee.tv/rest'
 API_KEY = 'HCN2BMuByjWnrBF4rUncEfFBMXDumku7nfT3CMnn'
@@ -17,6 +20,9 @@ AREA_USERS = 'users'
 AREA_TVGUIDE = 'tvguide'
 AREA_SYSTEM = 'system'
 AREA_CONTENT = 'content'
+
+METHOD_GET = 'get'
+METHOD_POST = 'post'
 
 class YouSeeApi(object):
     COOKIE_JAR = cookielib.LWPCookieJar()
@@ -31,20 +37,22 @@ class YouSeeApi(object):
 
         urllib2.install_opener(urllib2.build_opener(urllib2.HTTPCookieProcessor(self.COOKIE_JAR)))
 
-    def _invoke(self, area, function, params = None):
+    def _invoke(self, area, function, params = None, method = METHOD_GET):
         url = API_URL + '/' + area + '/' + function
-        if params:
+        if method == METHOD_GET and params:
             for key, value in params.items():
                 url += '/' + key + '/' + str(value)
         url += '/format/json'
 
-        print 'Invoking URL: %s' % url
+        print 'Invoking URL: %s' % re.sub('/password/([^/]+)/', '/password/****/', url)
 
         try:
             r = urllib2.Request(url, headers = {'X-API-KEY' : API_KEY})
+            if method == METHOD_POST and params:
+                print "POST data: %s" % urllib.urlencode(params)
+                r.add_data(urllib.urlencode(params))
             u = urllib2.urlopen(r)
             json = u.read()
-            print u.info()
             u.close()
 
             self.COOKIE_JAR.save(self.cookieFile, ignore_discard=True, ignore_expires=True)
@@ -57,6 +65,16 @@ class YouSeeApi(object):
             return None
 
 class YouSeeLiveTVApi(YouSeeApi):
+    def channel(self, id):
+        """
+        Returns metadata for channel based on channel id.
+
+        @param id: channel id
+        @return:
+        """
+        return self._invoke(AREA_LIVETV, 'channel', {
+            'id' : id
+        })
     def popularChannels(self):
         """
         Returns list of channels sorted by popularity.
@@ -158,7 +176,7 @@ class YouSeeMovieApi(YouSeeApi):
             'amount' : amount
         })
 
-    def order(self, movie_id, reference_id, client_ip):
+    def order(self, movie_id, reference_id = None, client_ip = None):
         """
         Creates order in yousee.tv backend. This is first step in the two-step procedure for generating orders
 
@@ -167,7 +185,19 @@ class YouSeeMovieApi(YouSeeApi):
         @param client_ip: Client ip-address
         @return:
         """
-        pass
+        if reference_id is None:
+            reference_id = 'plugin.video.yousee.tv-%s' % uuid.uuid1().hex
+            print "Generated reference_id: %s" % reference_id
+
+        if client_ip is None:
+            client_ip = urllib2.urlopen('http://automation.whatismyip.com/n09230945.asp').read()
+            print "Looked up client_ip: %s" % client_ip
+
+        return self._invoke(AREA_MOVIE, 'order', {
+            'movie_id' : movie_id,
+            'reference_id' : reference_id,
+            'client_ip' : client_ip
+        }, METHOD_POST)
 
     def order_confirm(self, order_id, transaction_id, giftcode, fee):
         """
@@ -177,7 +207,7 @@ class YouSeeMovieApi(YouSeeApi):
         @param order_id: Order id generated in order POST. This is returned as a POST variable from DIBS in callback request.
         @param transaction_id: Transaction id returned from DIBS (POST variable name "transact") (optional if giftcode is set)
         @param giftcode: 12-digit yousee giftcode (optional if transaction_id is set)
-        @param fee: fee amount in øre from DIBS (POST variable name "fee")
+        @param fee: fee amount in oere from DIBS (POST variable name "fee")
         @return:
         """
         pass
@@ -238,7 +268,7 @@ class YouSeeSystemApi(YouSeeApi):
     def supportmessage(self):
         return self._invoke(AREA_SYSTEM, 'supportmessage')
 
-class YouSeeContetnApi(YouSeeApi):
+class YouSeeContentApi(YouSeeApi):
     def teasers(self, area):
         """
         Returns editorial teasers from YouSee. (see yousee.tv/film for reference)
@@ -252,9 +282,8 @@ class YouSeeContetnApi(YouSeeApi):
 
 
 if __name__ == '__main__':
-    api = YouSeeSystemApi()
-#    json = api.allowedChannels()
-    json = api.supportmessage()
+    api = YouSeeLiveTVApi('/tmp')
+    json = api.channel(1)
 
 #    api = YouSeeTVGuideApi()
 #    json = api.programs(1)
