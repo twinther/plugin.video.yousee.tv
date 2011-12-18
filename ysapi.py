@@ -5,6 +5,7 @@ https://docs.google.com/document/d/1_rs5BXklnLqGS6g6eAjevVHsPafv4PXDCi_dAM2b7G0/
 import cookielib
 import urllib2
 import simplejson
+import os
 
 API_URL = 'http://api.yousee.tv/rest'
 API_KEY = 'HCN2BMuByjWnrBF4rUncEfFBMXDumku7nfT3CMnn'
@@ -19,10 +20,15 @@ AREA_CONTENT = 'content'
 
 class YouSeeApi(object):
     COOKIE_JAR = cookielib.LWPCookieJar()
+    COOKIES_LWP = 'cookies.lwp'
 
-    def __init__(self):
-        print 'YouSeeApi.__init__'
-        print self.COOKIE_JAR
+    def __init__(self, dataPath):
+        print 'YouSeeApi.__init__(dataPath = %s)' % dataPath
+
+        self.cookieFile = os.path.join(dataPath, self.COOKIES_LWP)
+        if os.path.isfile(self.cookieFile):
+            self.COOKIE_JAR.load(self.cookieFile, ignore_discard=True, ignore_expires=True)
+
         urllib2.install_opener(urllib2.build_opener(urllib2.HTTPCookieProcessor(self.COOKIE_JAR)))
 
     def _invoke(self, area, function, params = None):
@@ -38,13 +44,16 @@ class YouSeeApi(object):
             r = urllib2.Request(url, headers = {'X-API-KEY' : API_KEY})
             u = urllib2.urlopen(r)
             json = u.read()
+            print u.info()
             u.close()
+
+            self.COOKIE_JAR.save(self.cookieFile, ignore_discard=True, ignore_expires=True)
         except urllib2.HTTPError, error:
             json = error.read()
 
         try:
             return simplejson.loads(json)
-        except simplejson.JSONDecodeError, error:
+        except simplejson.JSONDecodeError:
             return None
 
 class YouSeeLiveTVApi(YouSeeApi):
