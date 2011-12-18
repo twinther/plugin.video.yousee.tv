@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bde9478-184d-4afe-8d87-93b1f5503fc5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/testrunner.xml" afterPath="$PROJECT_DIR$/.idea/testrunner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ysapi.py" afterPath="$PROJECT_DIR$/ysapi.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../xbmcstubs/xbmcaddon.py" afterPath="$PROJECT_DIR$/../xbmcstubs/xbmcaddon.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../xbmcstubs/xbmcgui.py" afterPath="$PROJECT_DIR$/../xbmcstubs/xbmcgui.py" />
     </list>
