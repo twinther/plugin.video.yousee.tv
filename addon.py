@@ -109,7 +109,6 @@ class YouSeeTv(object):
             xbmcplugin.endOfDirectory(HANDLE, False)
             return
 
-
         for movie in moviesInGenre['movies']:
             self._addMovieDirectoryItem(movie)
 
@@ -172,8 +171,22 @@ class YouSeeTv(object):
             xbmcplugin.setContent(HANDLE, 'movies')
             xbmcplugin.endOfDirectory(HANDLE)
 
+    def orderMovie(self, movie_id):
+        if not self._checkLogin():
+            return
+        api = ysapi.YouSeeMovieApi(CACHE_PATH)
+        json = api.order(movie_id)
+
+        if json and json.has_key('error'):
+            self._showError(json['error'])
+            return
+        else:
+            self._showError()
+            return
+
     def _addMovieDirectoryItem(self, movie):
         infoLabels = dict()
+        infoLabels['title'] = movie['title']
         infoLabels['plot'] = movie['summary_medium']
         infoLabels['plotoutline'] = movie['summary_short']
         infoLabels['year'] = movie['year']
@@ -183,13 +196,15 @@ class YouSeeTv(object):
         infoLabels['mpaa'] = str(movie['age_rating'])
         infoLabels['code'] = str(movie['imdb_id'])
         infoLabels['genre'] = ' / '.join(movie['genres'])
+        if movie['trailer'].has_key('rtmpe'):
+            infoLabels['trailer'] = movie['trailer']['rtmpe']
 
         iconImage = movie['cover_prefix'] + movie['covers']['big']
 
         item = xbmcgui.ListItem(movie['title'] + ' (DKK ' + str(movie['price']) + ')', iconImage = iconImage)
         item.setInfo('video', infoLabels = infoLabels)
         item.setProperty('Fanart_Image', FANART_IMAGE)
-        url = PATH + '?movie=' + movie['url_id']
+        url = PATH + '?orderMovie=' + movie['id']
         xbmcplugin.addDirectoryItem(HANDLE, url, item)
 
     def _anyChannelIconsMissing(self, channels):
@@ -293,8 +308,12 @@ if __name__ == '__main__':
     elif PARAMS.has_key('area') and PARAMS['area'][0] == 'movie-search':
         ytv.searchMovies()
 
+    elif PARAMS.has_key('orderMovie'):
+        ytv.orderMovie(PARAMS['orderMovie'][0])
+
     elif ADDON.getSetting('hide.movie.area') == 'true':
         ytv.showLiveTVChannels()
+
     else:
         ytv._showWarning()
         ytv.showOverview()
