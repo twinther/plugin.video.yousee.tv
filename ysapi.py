@@ -14,6 +14,8 @@ AREA_MOVIE = 'movie'
 AREA_PLAY = 'play'
 AREA_USERS = 'users'
 AREA_TVGUIDE = 'tvguide'
+AREA_SYSTEM = 'system'
+AREA_CONTENT = 'content'
 
 class YouSeeApi(object):
     COOKIE_JAR = cookielib.LWPCookieJar()
@@ -128,6 +130,58 @@ class YouSeeMovieApi(YouSeeApi):
             'theme' : theme
         })
 
+    def related(self, movie_id):
+        """
+
+        @param movie_id: can be both VODKa id and url-id
+        @return: List of movies (see moviedata method for description of movie object)
+        """
+        return self._invoke(AREA_MOVIE, 'related', {
+            'movie_id' : movie_id
+        })
+
+    def supported_payment_methods(self, amount):
+        """
+        @param amount:
+        @return: List of cards
+        """
+        return self._invoke(AREA_MOVIE, 'supported_payment_methods', {
+            'amount' : amount
+        })
+
+    def order(self, movie_id, reference_id, client_ip):
+        """
+        Creates order in yousee.tv backend. This is first step in the two-step procedure for generating orders
+
+        @param movie_id: VodKa ID for movie (VODKxxxxx)
+        @param reference_id: Unique reference id for order. This has to be unique within your API-key
+        @param client_ip: Client ip-address
+        @return:
+        """
+        pass
+
+    def order_confirm(self, order_id, transaction_id, giftcode, fee):
+        """
+        Confirms order in yousee.tv backend. This is the second step in the two-step procedure for generating orders.
+        A receipt is sent to the customer upon successful confirmation of order
+
+        @param order_id: Order id generated in order POST. This is returned as a POST variable from DIBS in callback request.
+        @param transaction_id: Transaction id returned from DIBS (POST variable name "transact") (optional if giftcode is set)
+        @param giftcode: 12-digit yousee giftcode (optional if transaction_id is set)
+        @param fee: fee amount in øre from DIBS (POST variable name "fee")
+        @return:
+        """
+        pass
+
+    def playerdata(self, movie_id):
+        """
+        Returns information needed for embedding player.
+
+        @param movie_id: VodKa ID for movie (VODKxxxxx)
+        @return:
+        """
+        pass
+
 class YouSeeTVGuideApi(YouSeeApi):
     def channels(self):
         """
@@ -168,10 +222,30 @@ class YouSeeUsersApi(YouSeeApi):
     def transactions(self):
         return self._invoke(AREA_USERS, 'transactions')
 
+    def isYouSeeIP(self):
+        return self._invoke(AREA_USERS, 'isyouseeip')
+
+class YouSeeSystemApi(YouSeeApi):
+    def supportmessage(self):
+        return self._invoke(AREA_SYSTEM, 'supportmessage')
+
+class YouSeeContetnApi(YouSeeApi):
+    def teasers(self, area):
+        """
+        Returns editorial teasers from YouSee. (see yousee.tv/film for reference)
+
+        @param area: Teaser area (allowed areas: movie)
+        @return:
+        """
+        return self._invoke(AREA_CONTENT, 'teasers', {
+            'area' : area
+        })
+
+
 if __name__ == '__main__':
-    api = YouSeeLiveTVApi()
+    api = YouSeeSystemApi()
 #    json = api.allowedChannels()
-    json = api.streamUrl(1)
+    json = api.supportmessage()
 
 #    api = YouSeeTVGuideApi()
 #    json = api.programs(1)
