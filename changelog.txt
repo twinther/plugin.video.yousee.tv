@@ -1,6 +1,9 @@
+[B]Version 2.0.1 - 2012-01-xx[/B]
+- Improved error handling with option for the user to submit exceptions/bugs
+
 [B]Version 2.0.0 - 2011-12-01[/B]
 - Complete rewrite using official YouSee API
-- Login is optional, it is not required if you are using your YouSee internet connection.
+- Login is no longer possible, so you need to be using your YouSee internet connection.
 - Improved graphics
 - Added YouSee Cinema navigation (disabled by default)
   - Unfortunately it is not possible to rent movies yet, as YouSee are investigating the rights required.

@@ -1,3 +1,22 @@
+#
+#      Copyright (C) 2012 Tommy Winther
+#      http://tommy.winther.nu
+#
+#  This Program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2, or (at your option)
+#  any later version.
+#
+#  This Program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this Program; see the file LICENSE.txt.  If not, write to
+#  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+#  http://www.gnu.org/copyleft/gpl.html
+#
 import os
 import sys
 import urlparse
@@ -5,6 +24,7 @@ import urllib2
 import StringIO
 
 import ysapi
+import buggalo
 
 import xbmc
 import xbmcaddon
@@ -67,18 +87,23 @@ class YouSeeTv(object):
     def playLiveTVChannel(self, channelId):
         if not self._checkLogin():
             return
+
         api = ysapi.YouSeeLiveTVApi(CACHE_PATH)
-        json = api.streamUrl(channelId)
-        if not json or not json.has_key('url') or not json['url']:
+        channel = api.channel(channelId)
+        stream = api.streamUrl(channelId)
+        if not stream or not stream.has_key('url') or not stream['url']:
             xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem())
 
-            if json and json.has_key('error'):
-                self._showError(json['error'])
+            if stream and stream.has_key('error'):
+                self._showError(stream['error'])
             else:
                 self._showError()
             return
 
-        item = xbmcgui.ListItem(path = json['url'])
+        thumbnailImage = os.path.join(CACHE_PATH, str(channelId) + '.png')
+        if not os.path.exists(thumbnailImage):
+            thumbnailImage = channel['logos']['large']
+        item = xbmcgui.ListItem(channel['nicename'], path = stream['url'], thumbnailImage = thumbnailImage)
         xbmcplugin.setResolvedUrl(HANDLE, True, item)
 
     def showMovieGenres(self):
@@ -255,7 +280,7 @@ class YouSeeTv(object):
         password = ADDON.getSetting('password')
 
         if username != '' and password != '':
-            print '[plugin.video.yousee.tv] Logging in...'
+            xbmc.log('[plugin.video.yousee.tv] Logging in...')
             api = ysapi.YouSeeUsersApi(CACHE_PATH)
             resp = api.login(username, password)
             if resp.has_key('error'):
@@ -271,7 +296,9 @@ class YouSeeTv(object):
         line3 = ADDON.getLocalizedString(39003)
         xbmcgui.Dialog().ok(title, line1, line2, line3)
 
-    def _showError(self, description = 'Ukendt fejl'):
+    def _showError(self, description = None):
+        if description is None:
+            description = ADDON.getLocalizedString(30053)
         xbmcgui.Dialog().ok(ADDON.getLocalizedString(30050), ADDON.getLocalizedString(30051),
             ADDON.getLocalizedString(30052), description)
 
@@ -289,31 +316,35 @@ if __name__ == '__main__':
     if not os.path.exists(CACHE_PATH):
         os.makedirs(CACHE_PATH)
 
-    ytv = YouSeeTv()
-    if PARAMS.has_key('area') and PARAMS['area'][0] == 'livetv':
-        ytv.showLiveTVChannels()
-    elif PARAMS.has_key('channel'):
-        ytv.playLiveTVChannel(PARAMS['channel'][0])
+    try:
+        ytv = YouSeeTv()
+        if PARAMS.has_key('area') and PARAMS['area'][0] == 'livetv':
+            ytv.showLiveTVChannels()
+        elif PARAMS.has_key('channel'):
+            ytv.playLiveTVChannel(PARAMS['channel'][0])
 
-    elif PARAMS.has_key('area') and PARAMS['area'][0] == 'movie-genre':
-        ytv.showMovieGenres()
-    elif PARAMS.has_key('genre'):
-        ytv.showMoviesInGenre(PARAMS['genre'][0])
+        elif PARAMS.has_key('area') and PARAMS['area'][0] == 'movie-genre':
+            ytv.showMovieGenres()
+        elif PARAMS.has_key('genre'):
+            ytv.showMoviesInGenre(PARAMS['genre'][0])
 
-    elif PARAMS.has_key('area') and PARAMS['area'][0] == 'movie-theme':
-        ytv.showMovieThemes()
-    elif PARAMS.has_key('theme'):
-        ytv.showMoviesInTheme(PARAMS['theme'][0])
+        elif PARAMS.has_key('area') and PARAMS['area'][0] == 'movie-theme':
+            ytv.showMovieThemes()
+        elif PARAMS.has_key('theme'):
+            ytv.showMoviesInTheme(PARAMS['theme'][0])
 
-    elif PARAMS.has_key('area') and PARAMS['area'][0] == 'movie-search':
-        ytv.searchMovies()
+        elif PARAMS.has_key('area') and PARAMS['area'][0] == 'movie-search':
+            ytv.searchMovies()
 
-    elif PARAMS.has_key('orderMovie'):
-        ytv.orderMovie(PARAMS['orderMovie'][0])
+#        elif PARAMS.has_key('orderMovie'):
+#            ytv.orderMovie(PARAMS['orderMovie'][0])
 
-    elif ADDON.getSetting('hide.movie.area') == 'true':
-        ytv.showLiveTVChannels()
+        elif ADDON.getSetting('hide.movie.area') == 'true':
+            ytv.showLiveTVChannels()
 
-    else:
-        ytv._showWarning()
-        ytv.showOverview()
+        else:
+            ytv._showWarning()
+            ytv.showOverview()
+
+    except Exception:
+        buggalo.onExceptionRaised()

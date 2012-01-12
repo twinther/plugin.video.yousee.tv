@@ -8,6 +8,7 @@
     <string id="30050">Ups, det er pinligt...</string>
     <string id="30051">Streamen kunne ikke afspilles!</string>
     <string id="30052">Fejlen fra serveren er:</string>
+    <string id="30053">Ukendt fejl</string>
 
     <string id="30100">Features</string>
     <string id="30101">Skjul YouSee Cinema navigation</string>
@@ -19,4 +20,18 @@
     <string id="39001">Det er desværre ikke muligt at leje film via YouSee</string>
     <string id="39002">Cinema pt. YouSee arbejder på at få rettighederne</string>
     <string id="39003">på plads.</string>
+
+    <string id="99980">Game over, man! [I]Game over![/I]</string>
+    <string id="99981">You can't handle the truth!</string>
+    <string id="99982">Danger Will Robinson</string>
+    <string id="99983">Why does it cry, Sméagol?</string>
+    <string id="99984">Houston, we have a problem...</string>
+    <string id="99985">E.T. phone home</string>
+
+    <string id="99990">Der er desværre opstået en fejl i addon'en.</string>
+    <string id="99991">Du kan hjælpe med at løse fejlen ved at indsende en</string>
+    <string id="99992">fejlrapport. Der sendes ikke personlige oplysninger.</string>
+    <string id="99993">Indsend fejlrapport</string>
+    <string id="99994">Indsend ikke</string>
+    <string id="99995">Tak!</string>
 </strings>

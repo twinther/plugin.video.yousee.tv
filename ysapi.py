@@ -1,7 +1,24 @@
-"""
-https://docs.google.com/document/d/1_rs5BXklnLqGS6g6eAjevVHsPafv4PXDCi_dAM2b7G0/edit?pli=1
-"""
-
+#
+#      Copyright (C) 2012 Tommy Winther
+#      http://tommy.winther.nu
+#
+#  This Program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2, or (at your option)
+#  any later version.
+#
+#  This Program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this Program; see the file LICENSE.txt.  If not, write to
+#  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+#  http://www.gnu.org/copyleft/gpl.html
+#
+# https://docs.google.com/document/d/1_rs5BXklnLqGS6g6eAjevVHsPafv4PXDCi_dAM2b7G0/edit?pli=1
+#
 import cookielib
 import urllib
 import urllib2
@@ -9,6 +26,8 @@ import simplejson
 import os
 import re
 import uuid
+
+import xbmc
 
 API_URL = 'http://api.yousee.tv/rest'
 API_KEY = 'HCN2BMuByjWnrBF4rUncEfFBMXDumku7nfT3CMnn'
@@ -29,8 +48,7 @@ class YouSeeApi(object):
     COOKIES_LWP = 'cookies.lwp'
 
     def __init__(self, dataPath):
-        print 'YouSeeApi.__init__(dataPath = %s)' % dataPath
-
+        xbmc.log('YouSeeApi.__init__(dataPath = %s)' % dataPath, xbmc.LOGDEBUG)
         self.cookieFile = os.path.join(dataPath, self.COOKIES_LWP)
         if os.path.isfile(self.cookieFile):
             self.COOKIE_JAR.load(self.cookieFile, ignore_discard=True, ignore_expires=True)
@@ -44,12 +62,12 @@ class YouSeeApi(object):
                 url += '/' + key + '/' + str(value)
         url += '/format/json'
 
-        print 'Invoking URL: %s' % re.sub('/password/([^/]+)/', '/password/****/', url)
+        xbmc.log('Invoking URL: %s' % re.sub('/password/([^/]+)/', '/password/****/', url), xbmc.LOGDEBUG)
 
         try:
             r = urllib2.Request(url, headers = {'X-API-KEY' : API_KEY})
             if method == METHOD_POST and params:
-                print "POST data: %s" % urllib.urlencode(params)
+                xbmc.log("POST data: %s" % urllib.urlencode(params), xbmc.LOGDEBUG)
                 r.add_data(urllib.urlencode(params))
             u = urllib2.urlopen(r)
             json = u.read()
@@ -187,11 +205,11 @@ class YouSeeMovieApi(YouSeeApi):
         """
         if reference_id is None:
             reference_id = 'plugin.video.yousee.tv-%s' % uuid.uuid1().hex
-            print "Generated reference_id: %s" % reference_id
+            xbmc.log("Generated reference_id: %s" % reference_id, xbmc.LOGDEBUG)
 
         if client_ip is None:
             client_ip = urllib2.urlopen('http://automation.whatismyip.com/n09230945.asp').read()
-            print "Looked up client_ip: %s" % client_ip
+            xbmc.log("Looked up client_ip: %s" % client_ip, xbmc.LOGDEBUG)
 
         return self._invoke(AREA_MOVIE, 'order', {
             'movie_id' : movie_id,
