@@ -276,6 +276,8 @@ class YouSeeTv(object):
                 out.save(path)
 
     def _checkLogin(self):
+        return True # Disable login for now
+
         username = ADDON.getSetting('username')
         password = ADDON.getSetting('password')
 
