@@ -16,10 +16,20 @@
     <string id="30103">Password</string>
     <string id="30104">Login not required for YouSee Bredbånd customers</string>
 
+    <string id="30110">Warnings</string>
+    <string id="30111">Warn if not on YouSee Bredbånd connection</string>
+
     <string id="39000">Please note!</string>
     <string id="39001">Unfortunately it is not possible to rent movies via</string>
     <string id="39002">YouSee Cinema at the moment. YouSee is working on</string>
     <string id="39003">getting the rights in place.</string>
+
+    <string id="99970">Warning!</string>
+    <string id="99971">It looks like you are not on a YouSee Bredbånd</string>
+    <string id="99972">internet connection. This addon only works for</string>
+    <string id="99973">YouSee Bredbånd customers.</string>
+    <string id="99974">OK</string>
+    <string id="99975">Don't show again</string>
 
     <string id="99980">Game over, man! [I]Game over![/I]</string>
     <string id="99981">You can't handle the truth!</string>

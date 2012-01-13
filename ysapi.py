@@ -280,7 +280,7 @@ class YouSeeUsersApi(YouSeeApi):
         return self._invoke(AREA_USERS, 'transactions')
 
     def isYouSeeIP(self):
-        return self._invoke(AREA_USERS, 'isyouseeip')
+        return self._invoke(AREA_USERS, 'isyouseeip') == 1
 
 class YouSeeSystemApi(YouSeeApi):
     def supportmessage(self):

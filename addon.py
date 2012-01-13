@@ -291,6 +291,19 @@ class YouSeeTv(object):
 
         return True
 
+    def isYouSeeIP(self):
+        api = ysapi.YouSeeUsersApi(CACHE_PATH)
+        if not api.isYouSeeIP() and ADDON.getSetting('warn.if.not.yousee.ip') == 'true':
+            heading = ADDON.getLocalizedString(99970)
+            line1 = ADDON.getLocalizedString(99971)
+            line2 = ADDON.getLocalizedString(99972)
+            line3 = ADDON.getLocalizedString(99973)
+            nolabel = ADDON.getLocalizedString(99974)
+            yeslabel = ADDON.getLocalizedString(99975)
+            if xbmcgui.Dialog().yesno(heading, line1, line2, line3, nolabel, yeslabel):
+                ADDON.setSetting('warn.if.not.yousee.ip', 'false')
+
+
     def _showWarning(self):
         title = ADDON.getLocalizedString(39000)
         line1 = ADDON.getLocalizedString(39001)
@@ -342,10 +355,12 @@ if __name__ == '__main__':
 #            ytv.orderMovie(PARAMS['orderMovie'][0])
 
         elif ADDON.getSetting('hide.movie.area') == 'true':
+            ytv.isYouSeeIP()
             ytv.showLiveTVChannels()
 
         else:
             ytv._showWarning()
+            ytv.isYouSeeIP()
             ytv.showOverview()
 
     except Exception:
