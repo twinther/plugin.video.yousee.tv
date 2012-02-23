@@ -321,5 +321,8 @@ if __name__ == '__main__':
             ytv.isYouSeeIP()
             ytv.showOverview()
 
+    except ysapi.YouSeeApiException, ex:
+        ytv._showError(str(ex))
+
     except Exception:
         buggalo.onExceptionRaised()

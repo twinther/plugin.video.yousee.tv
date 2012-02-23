@@ -43,6 +43,9 @@ AREA_ARCHIVE = 'archive'
 METHOD_GET = 'get'
 METHOD_POST = 'post'
 
+class YouSeeApiException(Exception):
+    pass
+
 class YouSeeApi(object):
     COOKIE_JAR = cookielib.LWPCookieJar()
     COOKIES_LWP = 'cookies.lwp'
@@ -76,6 +79,8 @@ class YouSeeApi(object):
             self.COOKIE_JAR.save(self.cookieFile, ignore_discard=True, ignore_expires=True)
         except urllib2.HTTPError, error:
             json = error.read()
+        except Exception, ex:
+            raise YouSeeApiException(ex)
 
         try:
             return simplejson.loads(json)
