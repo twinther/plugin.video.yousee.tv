@@ -25,7 +25,6 @@ import urllib2
 import simplejson
 import os
 import re
-import uuid
 
 import xbmc
 
@@ -205,50 +204,6 @@ class YouSeeMovieApi(YouSeeApi):
             'amount' : amount
         })
 
-    def order(self, movie_id, reference_id = None, client_ip = None):
-        """
-        Creates order in yousee.tv backend. This is first step in the two-step procedure for generating orders
-
-        @param movie_id: VodKa ID for movie (VODKxxxxx)
-        @param reference_id: Unique reference id for order. This has to be unique within your API-key
-        @param client_ip: Client ip-address
-        @return:
-        """
-        if reference_id is None:
-            reference_id = 'plugin.video.yousee.tv-%s' % uuid.uuid1().hex
-            xbmc.log("Generated reference_id: %s" % reference_id, xbmc.LOGDEBUG)
-
-        if client_ip is None:
-            client_ip = urllib2.urlopen('http://automation.whatismyip.com/n09230945.asp').read()
-            xbmc.log("Looked up client_ip: %s" % client_ip, xbmc.LOGDEBUG)
-
-        return self._invoke(AREA_MOVIE, 'order', {
-            'movie_id' : movie_id,
-            'reference_id' : reference_id,
-            'client_ip' : client_ip
-        }, METHOD_POST)
-
-    def order_confirm(self, order_id, transaction_id, giftcode, fee):
-        """
-        Confirms order in yousee.tv backend. This is the second step in the two-step procedure for generating orders.
-        A receipt is sent to the customer upon successful confirmation of order
-
-        @param order_id: Order id generated in order POST. This is returned as a POST variable from DIBS in callback request.
-        @param transaction_id: Transaction id returned from DIBS (POST variable name "transact") (optional if giftcode is set)
-        @param giftcode: 12-digit yousee giftcode (optional if transaction_id is set)
-        @param fee: fee amount in oere from DIBS (POST variable name "fee")
-        @return:
-        """
-        pass
-
-    def playerdata(self, movie_id):
-        """
-        Returns information needed for embedding player.
-
-        @param movie_id: VodKa ID for movie (VODKxxxxx)
-        @return:
-        """
-        pass
 
 class YouSeeTVGuideApi(YouSeeApi):
     def channels(self):
@@ -302,7 +257,7 @@ class YouSeeContentApi(YouSeeApi):
         """
         Returns editorial teasers from YouSee. (see yousee.tv/film for reference)
 
-        @param area: Teaser area (allowed areas: movie)
+        @param area: Teaser area (allowed area: movie)
         @return:
         """
         return self._invoke(AREA_CONTENT, 'teasers', {
