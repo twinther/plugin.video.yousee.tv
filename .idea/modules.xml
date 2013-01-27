@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../script.module.buggalo/lib/.idea/lib.iml" filepath="$PROJECT_DIR$/../script.module.buggalo/lib/.idea/lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/plugin.video.yousee.tv.iml" filepath="$PROJECT_DIR$/.idea/plugin.video.yousee.tv.iml" />
       <module fileurl="file://$PROJECT_DIR$/../xbmcstubs/.idea/xbmcstubs.iml" filepath="$PROJECT_DIR$/../xbmcstubs/.idea/xbmcstubs.iml" />
     </modules>
