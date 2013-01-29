@@ -2,28 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bde9478-184d-4afe-8d87-93b1f5503fc5" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/buggalo.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addon.py" afterPath="$PROJECT_DIR$/addon.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addon.xml" afterPath="$PROJECT_DIR$/addon.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/changelog.txt" afterPath="$PROJECT_DIR$/changelog.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/plugin.video.yousee.tv.iml" afterPath="$PROJECT_DIR$/.idea/plugin.video.yousee.tv.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/language/Danish/strings.xml" afterPath="$PROJECT_DIR$/resources/language/Danish/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/language/English/strings.xml" afterPath="$PROJECT_DIR$/resources/language/English/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/testrunner.xml" afterPath="$PROJECT_DIR$/.idea/testrunner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ysapi.py" afterPath="$PROJECT_DIR$/ysapi.py" />
     </list>
     <ignored path="plugin.video.yousee.tv.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359299537491" ignored="false" />
+    <file path="/Dummy.txt" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359484885786" ignored="false" />
     <file path="/a.dummy" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359301752707" ignored="false" />
     <file path="/ysapi.py" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359301816081" ignored="false" />
     <file path="/addon.py" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359312923912" ignored="false" />
-    <file path="/addon.xml" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359303804855" ignored="false" />
-    <file path="/changelog.txt" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359311473729" ignored="false" />
+    <file path="/addon.xml" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359485160044" ignored="false" />
+    <file path="/changelog.txt" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359485136557" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,9 +37,7 @@
         <entry file="file://$PROJECT_DIR$/addon.py">
           <provider selected="true" editor-type-id="text-editor">
             <state line="311" column="29" selection-start="11861" selection-end="11861" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#817#826#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,7 +63,7 @@
       <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/language/English/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="74" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0">
+            <state line="18" column="39" selection-start="789" selection-end="789" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -85,9 +73,7 @@
         <entry file="file://$PROJECT_DIR$/ysapi.py">
           <provider selected="true" editor-type-id="text-editor">
             <state line="127" column="0" selection-start="4108" selection-end="4108" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#912#928#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -95,7 +81,7 @@
       <file leaf-file-name="addon.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/addon.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="51" selection-start="222" selection-end="222" vertical-scroll-proportion="0.084586464">
+            <state line="10" column="16" selection-start="552" selection-end="552" vertical-scroll-proportion="0.27027026">
               <folding />
             </state>
           </provider>
@@ -104,7 +90,7 @@
       <file leaf-file-name="changelog.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/changelog.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="34" selection-end="124" vertical-scroll-proportion="0.0">
+            <state line="8" column="31" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -136,10 +122,10 @@
         <option value="$PROJECT_DIR$/resources/settings.xml" />
         <option value="$PROJECT_DIR$/resources/language/Danish/strings.xml" />
         <option value="$PROJECT_DIR$/resources/language/English/strings.xml" />
-        <option value="$PROJECT_DIR$/changelog.txt" />
         <option value="$PROJECT_DIR$/addon.py" />
-        <option value="$PROJECT_DIR$/addon.xml" />
         <option value="$PROJECT_DIR$/ysapi.py" />
+        <option value="$PROJECT_DIR$/changelog.txt" />
+        <option value="$PROJECT_DIR$/addon.xml" />
       </list>
     </option>
   </component>
@@ -297,15 +283,15 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../script.module.buggalo/lib" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="134" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="915" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="911" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="915" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="130" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="124" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -440,6 +426,11 @@
       <created>1306333811676</created>
       <updated>1306333811676</updated>
     </task>
+    <task id="LOCAL-00001" summary="Updated to use script.module.buggalo&#10;Fixed a couple minor programs reported by buggalo">
+      <created>1359313262397</created>
+      <updated>1359313262397</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -448,10 +439,9 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32718122" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3439394" sideWeight="0.6728188" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24621212" sideWeight="0.6728188" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38553318" sideWeight="0.5555556" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45637584" sideWeight="0.66586924" order="7" side_tool="true" content_ui="tabs" />
@@ -461,6 +451,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32718122" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -506,7 +497,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Fix problem with YouSee check&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated to use script.module.buggalo&#10;Fixed a couple minor programs reported by buggalo" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -529,6 +520,7 @@
     <MESSAGE value="v2.0.1" />
     <MESSAGE value="added archive api" />
     <MESSAGE value="- Fix problem with YouSee check&#10;" />
+    <MESSAGE value="Updated to use script.module.buggalo&#10;Fixed a couple minor programs reported by buggalo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -568,21 +560,36 @@
     </entry>
     <entry file="file:///usr/lib/python2.7/dist-packages/simplejson/decoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="6" selection-start="827" selection-end="827" vertical-scroll-proportion="0.33272395">
-          <folding />
-        </state>
+        <state line="31" column="6" selection-start="827" selection-end="827" vertical-scroll-proportion="0.33272395" />
       </provider>
     </entry>
     <entry file="file:///usr/share/pyshared/simplejson/decoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="18" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.027422303">
-          <folding />
-        </state>
+        <state line="93" column="18" selection-start="2911" selection-end="2911" vertical-scroll-proportion="0.027422303" />
       </provider>
     </entry>
     <entry file="file:///usr/share/pyshared/PIL/Image.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="327" selection-end="327" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="311" column="29" selection-start="11861" selection-end="11861" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ysapi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="0" selection-start="4108" selection-end="4108" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -594,48 +601,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/settings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="327" selection-end="327" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/language/English/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="74" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0">
+        <state line="18" column="39" selection-start="789" selection-end="789" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="311" column="29" selection-start="11861" selection-end="11861" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#817#826#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ysapi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="0" selection-start="4108" selection-end="4108" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#912#928#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/changelog.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="34" selection-end="124" vertical-scroll-proportion="0.0">
+        <state line="8" column="31" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/addon.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="51" selection-start="222" selection-end="222" vertical-scroll-proportion="0.084586464">
+        <state line="10" column="16" selection-start="552" selection-end="552" vertical-scroll-proportion="0.27027026">
           <folding />
         </state>
       </provider>
