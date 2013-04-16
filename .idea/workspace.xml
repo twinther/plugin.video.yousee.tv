@@ -3,18 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="5bde9478-184d-4afe-8d87-93b1f5503fc5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addon.py" afterPath="$PROJECT_DIR$/addon.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addon.xml" afterPath="$PROJECT_DIR$/addon.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/changelog.txt" afterPath="$PROJECT_DIR$/changelog.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../xbmcstubs/xbmcgui.py" afterPath="$PROJECT_DIR$/../xbmcstubs/xbmcgui.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ysapi.py" afterPath="$PROJECT_DIR$/ysapi.py" />
     </list>
     <ignored path="plugin.video.yousee.tv.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366130614734" ignored="false" />
+    <file path="/Dummy.txt" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366133576696" ignored="false" />
     <file path="/a.dummy" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359301752707" ignored="false" />
     <file path="/ysapi.py" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366132688954" ignored="false" />
-    <file path="/addon.py" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366133071250" ignored="false" />
+    <file path="/addon.py" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366140262080" ignored="false" />
     <file path="/addon.xml" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359485160044" ignored="false" />
     <file path="/changelog.txt" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366133454691" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,7 +36,7 @@
       <file leaf-file-name="addon.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/addon.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="343" column="11" selection-start="12688" selection-end="12688" vertical-scroll-proportion="0.0">
+            <state line="331" column="0" selection-start="12412" selection-end="12412" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#817#826#0" expanded="true" />
               </folding>
@@ -451,13 +448,18 @@
       <created>1359485718682</created>
       <updated>1359485718682</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Switched to use iPhone streams to get better quality">
+      <created>1366133592825</created>
+      <updated>1366133592825</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1368" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -473,7 +475,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32718122" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -522,7 +523,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial version for Frodo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Switched to use iPhone streams to get better quality" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -548,6 +549,7 @@
     <MESSAGE value="- Fix problem with YouSee check&#10;" />
     <MESSAGE value="Updated to use script.module.buggalo&#10;Fixed a couple minor programs reported by buggalo" />
     <MESSAGE value="Initial version for Frodo" />
+    <MESSAGE value="Switched to use iPhone streams to get better quality" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -630,19 +632,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="343" column="11" selection-start="12688" selection-end="12688" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#817#826#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/addon.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="49" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="331" column="0" selection-start="12412" selection-end="12412" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#817#826#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

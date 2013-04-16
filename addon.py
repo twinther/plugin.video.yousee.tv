@@ -313,6 +313,7 @@ if __name__ == '__main__':
         os.makedirs(CACHE_PATH)
 
     ytv = YouSeeTv()
+    buggalo.SUBMIT_URL = 'http://tommy.winther.nu/exception/submit.php'
     try:
         if 'area' in PARAMS and PARAMS['area'][0] == 'livetv':
             ytv.showLiveTVChannels()
