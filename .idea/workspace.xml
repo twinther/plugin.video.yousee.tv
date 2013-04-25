@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bde9478-184d-4afe-8d87-93b1f5503fc5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addon.py" afterPath="$PROJECT_DIR$/addon.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addon.xml" afterPath="$PROJECT_DIR$/addon.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../xbmcstubs/xbmcgui.py" afterPath="$PROJECT_DIR$/../xbmcstubs/xbmcgui.py" />
     </list>
     <ignored path="plugin.video.yousee.tv.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366133576696" ignored="false" />
+    <file path="/Dummy.txt" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366920091737" ignored="false" />
     <file path="/a.dummy" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359301752707" ignored="false" />
     <file path="/ysapi.py" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366132688954" ignored="false" />
-    <file path="/addon.py" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366140262080" ignored="false" />
-    <file path="/addon.xml" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1359485160044" ignored="false" />
+    <file path="/addon.py" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366221811371" ignored="false" />
+    <file path="/addon.xml" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366920128642" ignored="false" />
     <file path="/changelog.txt" changelist="5bde9478-184d-4afe-8d87-93b1f5503fc5" time="1366133454691" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,10 +36,19 @@
       <file leaf-file-name="addon.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/addon.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="331" column="0" selection-start="12412" selection-end="12412" vertical-scroll-proportion="0.0">
+            <state line="70" column="15" selection-start="2438" selection-end="2438" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#817#826#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urllib2.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file:///usr/lib/python2.6/urllib2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="527" column="8" selection-start="17475" selection-end="17475" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -74,27 +83,25 @@
       <file leaf-file-name="ysapi.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ysapi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="331" column="32" selection-start="9723" selection-end="9723" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#912#925#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addon.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/addon.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="49" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0">
+            <state line="193" column="0" selection-start="5878" selection-end="5878" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="changelog.txt" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="addon.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/addon.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="66" selection-start="1715" selection-end="1715" vertical-scroll-proportion="0.63770795">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="changelog.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/changelog.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="54" selection-start="36" selection-end="88" vertical-scroll-proportion="0.026086956">
+            <state line="1" column="2" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -127,9 +134,9 @@
         <option value="$PROJECT_DIR$/resources/language/Danish/strings.xml" />
         <option value="$PROJECT_DIR$/resources/language/English/strings.xml" />
         <option value="$PROJECT_DIR$/ysapi.py" />
-        <option value="$PROJECT_DIR$/addon.xml" />
         <option value="$PROJECT_DIR$/changelog.txt" />
         <option value="$PROJECT_DIR$/addon.py" />
+        <option value="$PROJECT_DIR$/addon.xml" />
       </list>
     </option>
   </component>
@@ -452,19 +459,22 @@
       <created>1366133592825</created>
       <updated>1366133592825</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="configure buggalo">
+      <created>1366140371118</created>
+      <updated>1366140371118</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="25" width="1368" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962178" sideWeight="0.5657238" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25718608" sideWeight="0.5657238" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38553318" sideWeight="0.5555556" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45637584" sideWeight="0.66586924" order="7" side_tool="true" content_ui="tabs" />
@@ -475,6 +485,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32718122" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -523,7 +534,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Switched to use iPhone streams to get better quality" />
+    <option name="LAST_COMMIT_MESSAGE" value="configure buggalo" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -550,6 +561,7 @@
     <MESSAGE value="Updated to use script.module.buggalo&#10;Fixed a couple minor programs reported by buggalo" />
     <MESSAGE value="Initial version for Frodo" />
     <MESSAGE value="Switched to use iPhone streams to get better quality" />
+    <MESSAGE value="configure buggalo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -557,11 +569,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/lib/python2.7/urllib2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="6" selection-start="5706" selection-end="5706" vertical-scroll-proportion="0.747557" />
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python2.7/dist-packages/simplejson/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="409" column="0" selection-start="16567" selection-end="16567" vertical-scroll-proportion="0.9465241" />
@@ -625,32 +632,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ysapi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="331" column="32" selection-start="9723" selection-end="9723" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#912#925#0" expanded="true" />
-          </folding>
+        <state line="193" column="0" selection-start="5878" selection-end="5878" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/addon.xml">
+    <entry file="file:///usr/lib/python2.6/urllib2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="49" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0">
+        <state line="527" column="8" selection-start="17475" selection-end="17475" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/changelog.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="2" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/addon.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="331" column="0" selection-start="12412" selection-end="12412" vertical-scroll-proportion="0.0">
+        <state line="70" column="15" selection-start="2438" selection-end="2438" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#817#826#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/changelog.txt">
+    <entry file="file://$PROJECT_DIR$/addon.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="54" selection-start="36" selection-end="88" vertical-scroll-proportion="0.026086956">
+        <state line="23" column="66" selection-start="1715" selection-end="1715" vertical-scroll-proportion="0.63770795">
           <folding />
         </state>
       </provider>
